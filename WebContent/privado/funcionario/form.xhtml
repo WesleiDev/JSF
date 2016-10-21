@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head><title>Edição de funcionarios</title></h:head> 
+<h:body> 
+	<h:form enctype="multipart/form-data"><!-- Quandio formos upar um arquivo deve ser feito esta configuração no form.. multipart... -->
+		<h:messages id="messages"/>
+		<h:panelGrid columns="2">
+			<f:facet name="header">Edição de funcionarios</f:facet>
+			<f:facet name="footer">
+				<div align="center">
+					<h:commandButton action="#{controleFuncionario.cancelar()}" value="Cancelar" immediate="true"/>
+					<h:commandButton action="#{controleFuncionario.gravar()}" value="Gravar" />
+				</div>
+			</f:facet>
+			<h:outputLabel value="ID" />
+			<h:inputText value="#{controleFuncionario.objeto.id}" readonly="true"/>
+			<h:outputLabel value="Nome" />
+			<h:inputText value="#{controleFuncionario.objeto.nome}" maxlength="40" size="40"/>
+			<h:outputLabel value="CPF" />
+			<h:inputText value="#{controleFuncionario.objeto.cpf}" maxlength="14" size="14" />
+			<h:outputLabel value="Email" />
+			<h:inputText value="#{controleFuncionario.objeto.email}" maxlength="40" size="40" />
+			<h:outputLabel value="Salário" />
+			<h:inputText value="#{controleFuncionario.objeto.salario}" maxlength="20" size="20" />
+			<h:outputLabel value="Nascimento" />
+			<h:inputText value="#{controleFuncionario.objeto.nascimento}" maxlength="12" size="12" >
+				<f:converter converterId="converterCalendar"/>
+			</h:inputText>
+			<h:outputLabel value="Ativo" />
+			<h:selectBooleanCheckbox value="#{controleFuncionario.objeto.ativo}" />
+			<h:outputLabel value="Nome de Usuario" />
+			<h:inputText value="#{controleFuncionario.objeto.nomeUsuario}" maxlength="20" size="20" />
+			<h:outputLabel value="Senha" />
+			<h:inputSecret value="#{controleFuncionario.objeto.senha}" maxlength="10" size="10" redisplay="true"/>
+			<h:outputLabel value="Grupo" />
+			<h:selectOneMenu value="#{controleFuncionario.objeto.grupo}"
+			converter="#{controleFuncionario.converterGrupo}">
+				<f:selectItem itemLabel="Selecione um grupo" noSelectionOption="true"/>
+				<f:selectItems value="#{controleFuncionario.daoGrupo.listarTodos()}"/>
+			</h:selectOneMenu>
+			<h:outputLabel value="Setor" />
+				<h:selectOneMenu value="#{controleFuncionario.objeto.setor}"
+			converter="#{controleFuncionario.converterSetor}">
+				<f:selectItem itemLabel="Selecione um setor" noSelectionOption="true"/>
+				<f:selectItems value="#{controleFuncionario.daoSetor.listarTodos()}"/>
+			</h:selectOneMenu>
+			<h:outputLabel value="Foto" />
+			<p:fileUpload id="uploadImagem" mode="advanced"
+			update="messages, imagem" auto="true" label="Selecionar"
+			fileUploadListener="#{controleFuncionario.enviarFoto}"
+			allowTypes="/(\./|/)(gif|jpe?g|png)$/"/>
+			<h:outputLabel value="" />
+			<p:graphicImage value="#{controleFuncionario.objeto.image}"
+			id="imagem" style="width:200px; height:200px" cache="false"
+			/>
+			
+			
+			</h:panelGrid>
+	</h:form>
+</h:body> 
+</html>

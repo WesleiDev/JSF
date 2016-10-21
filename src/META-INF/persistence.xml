@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="ProjetosJSF">
+		<class>br.com.devmedia.beans.Funcionario</class>
+		<class>br.com.devmedia.beans.Grupo</class>
+		<class>br.com.devmedia.beans.Projeto</class>
+		<class>br.com.devmedia.beans.ProjetoFuncionario</class>
+		<class>br.com.devmedia.beans.Setor</class>
+		<properties>
+			<property name="hibernate.connection.username" value="root"/>
+			<property name="hibernate.connection.passoword" value=""/>
+			<property name="hibernate.connection.url" 
+			value="jdbc:mysql://localhost:3306/projetojsf"/>
+			<property name="hibernate.connection.driver_class" 
+			value="com.mysql.jdbc.Driver"/><!-- informando o Driver do conector -->
+			<property name="hibernate.cache.provider_class" 
+			value="org.hibernate.cache.NoCacheProvider"/>
+			<property name="hibernate.dialect" 
+			value="org.hibernate.dialect.MySQLDialect"/>
+			<property name="hibernate.connection.autocommit" value="false"/><!-- Aqui estamos informando que o commite não será automático -->
+			<property name="hibernate.hbm2ddl.auto" value="update"/><!-- Cria a tabela no banco quando encontrar o mapeamento-->
+		</properties>
+	</persistence-unit>
+</persistence>
